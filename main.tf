@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 
-resource "aws_security_group" "my-sg" {
-  name        = "automate-sg"
+resource "aws_security_group" "my-sgg" {
+  name        = "automate-sgg"
   description = "Allow SSH and HTTP traffic"
 
   # Ingress: incoming traffic
@@ -33,7 +33,7 @@ resource "aws_security_group" "my-sg" {
   }
 
   tags = {
-    Name = "automate-sg"
+    Name = "automate-sgg"
   }
 }
 
