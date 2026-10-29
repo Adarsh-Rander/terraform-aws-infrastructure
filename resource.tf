@@ -20,8 +20,8 @@ resource "aws_instance" "instance" {
   }
 }
 
-resource "aws_s3_bucket" "app_bucket" {
-  bucket = "my-unique-devops-bucket-2026-demo1"
+resource "aws_s3_bucket" "app_bucket_s3" {
+  bucket = "adarsh-tfstate-dynamobucket-20261029"
 }
 
 

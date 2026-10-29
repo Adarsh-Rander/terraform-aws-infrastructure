@@ -26,7 +26,7 @@ resource "aws_sns_topic_policy" "allow_s3" {
       Resource  = aws_sns_topic.terraform_alerts.arn
       Condition = {
         ArnLike = {
-          "aws:SourceArn" = "arn:aws:s3:::adarsh-tfstate-dynamobucket"
+          "aws:SourceArn" = "arn:aws:s3:::adarsh-tfstate-dynamobucket-20261029"
         }
       }
     }]
@@ -34,7 +34,8 @@ resource "aws_sns_topic_policy" "allow_s3" {
 }
 
 resource "aws_s3_bucket_notification" "terraform_state_updates" {
-  bucket = "adarsh-tfstate-dynamobucket"
+  bucket = "adarsh-tfstate-dynamobucket-20261029"
+
 
   topic {
     topic_arn     = aws_sns_topic.terraform_alerts.arn
