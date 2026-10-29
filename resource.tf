@@ -8,20 +8,21 @@ resource "aws_instance" "instance" {
     "aws-terraform-small"  = "t2.small"
   })
 
-  depends_on = [aws_security_group.my-sg]
+  depends_on = [aws_security_group.my-sgg]
 
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = each.value
   key_name               = "mumbaikey"
-  vpc_security_group_ids = [aws_security_group.my-sg.id]
+  vpc_security_group_ids = [aws_security_group.my-sgg.id]
 
   tags = {
     Name = each.key
   }
 }
 
-resource "aws_s3_bucket" "app_bucket_s3" {
-  bucket = "adarsh-tfstate-dynamobucket-20261029"
+resource "aws_s3_bucket" "app_bucket" {
+  bucket = "adarsh-devops-app-bucket-20261029"
 }
+
 
 

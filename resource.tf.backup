@@ -1,0 +1,40 @@
+
+
+resource "aws_instance" "instance" {
+
+  for_each = tomap({
+    "aws-terrafor-micro"   = "t2.micro"
+    "aws-terraform-medium" = "t2.medium"
+    "aws-terraform-small"  = "t2.small"
+  })
+
+  depends_on = [aws_security_group.my-sg]
+
+  ami                    = data.aws_ami.amazon_linux.id
+  instance_type          = each.value
+  key_name               = "mumbaikey"
+  vpc_security_group_ids = [aws_security_group.my-sg.id]
+
+  tags = {
+    Name = each.key
+  }
+}
+
+resource "aws_s3_bucket" "app_bucket" {
+  bucket = "adarsh-devops-app-bucket-20261029"
+}
+
+resource "aws_instance" "instance" {
+  count = var.instance_count
+
+  ami                    = data.aws_ami.amazon_linux.id
+  instance_type          = var.instance_type
+  key_name               = "mumbaikey"
+  vpc_security_group_ids = [aws_security_group.my-sg.id]
+
+  tags = {
+    Name        = "${var.environment}-server-${count.index + 1}"
+    Environment = var.environment
+  }
+}
+
